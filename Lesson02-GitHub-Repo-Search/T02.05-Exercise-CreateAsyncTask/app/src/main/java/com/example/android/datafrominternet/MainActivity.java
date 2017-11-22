@@ -77,8 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            mSearchResultsTextView.setText(s);
+            if (s != null && !s.equals("")) {
+                mSearchResultsTextView.setText(s);
+            }
         }
     }
 
