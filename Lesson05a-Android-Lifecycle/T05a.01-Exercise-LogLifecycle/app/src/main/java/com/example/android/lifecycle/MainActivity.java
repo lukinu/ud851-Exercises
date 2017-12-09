@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Called when the activity is first created. This is where you should do all of your normal
      * static set up: create views, bind data to lists, etc.
-     *
+     * <p>
      * Always followed by onStart().
      *
      * @param savedInstanceState The Activity's previously frozen state, if there was one.
@@ -48,6 +48,43 @@ public class MainActivity extends AppCompatActivity {
         mLifecycleDisplay = (TextView) findViewById(R.id.tv_lifecycle_events_display);
 
         // TODO (1) Use logAndAppend within onCreate
+        logAndAppend("onCreate");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        logAndAppend("onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        logAndAppend("onStop");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        logAndAppend("onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        logAndAppend("onPause");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        logAndAppend("onRestart");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        logAndAppend("onDestroy");
     }
 
     // TODO (2) Override onStart, call super.onStart, and call logAndAppend with ON_START
