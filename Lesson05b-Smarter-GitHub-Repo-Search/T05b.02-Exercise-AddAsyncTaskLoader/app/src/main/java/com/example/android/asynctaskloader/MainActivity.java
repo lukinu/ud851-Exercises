@@ -16,6 +16,7 @@
 package com.example.android.asynctaskloader;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 import com.example.android.asynctaskloader.utilities.NetworkUtils;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.net.URL;
 
 // COMPLETED (1) implement LoaderManager.LoaderCallbacks<String> on MainActivity
@@ -146,32 +148,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<String> onCreateLoader(int id, final Bundle args) {
-        return new AsyncTaskLoader<String>(this) {
-            @Override
-            protected void onStartLoading() {
-                super.onStartLoading();
-                if (args == null) {
-                    return;
-                }
-                mLoadingIndicator.setVisibility(View.VISIBLE);
-                forceLoad();
-            }
-
-            @Override
-            public String loadInBackground() {
-                String githubQuery = args.getString(SEARCH_QUERY_URL_EXTRA);
-                if (githubQuery == null || githubQuery.isEmpty()) {
-                    return null;
-                }
-                try {
-                    URL githubQueryUrl = new URL(githubQuery);
-                    return NetworkUtils.getResponseFromHttpUrl(githubQueryUrl);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-        };
+        return new GithubQueryAsyncTaskLoader(getApplicationContext(), args, mLoadingIndicator);
     }
 
 
@@ -242,5 +219,42 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         outState.putString(SEARCH_QUERY_URL_EXTRA, queryUrl);
 
         // COMPLETED (27) Remove the code that persists the JSON
+    }
+
+    private static class GithubQueryAsyncTaskLoader extends AsyncTaskLoader<String> {
+
+        WeakReference<ProgressBar> progressBarWeakReference;
+        Bundle args;
+
+        public GithubQueryAsyncTaskLoader(Context context, Bundle args, ProgressBar progressBar) {
+            super(context);
+            this.progressBarWeakReference = new WeakReference<ProgressBar>(progressBar);
+            this.args = args;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            super.onStartLoading();
+            if (args == null) {
+                return;
+            }
+            progressBarWeakReference.get().setVisibility(View.VISIBLE);
+            forceLoad();
+        }
+
+        @Override
+        public String loadInBackground() {
+            String githubQuery = args.getString(SEARCH_QUERY_URL_EXTRA);
+            if (githubQuery == null || githubQuery.isEmpty()) {
+                return null;
+            }
+            try {
+                URL githubQueryUrl = new URL(githubQuery);
+                return NetworkUtils.getResponseFromHttpUrl(githubQueryUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 }
