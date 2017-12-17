@@ -27,9 +27,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
-// TODO (1) Implement OnPreferenceChangeListener
+// COMPLETED (1) Implement OnPreferenceChangeListener
 public class SettingsFragment extends PreferenceFragmentCompat implements
-        OnSharedPreferenceChangeListener {
+        OnSharedPreferenceChangeListener, Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -50,8 +50,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 String value = sharedPreferences.getString(p.getKey(), "");
                 setPreferenceSummary(p, value);
             }
+            if (p instanceof EditTextPreference) {
+                p.setOnPreferenceChangeListener(this);
+            }
         }
-        // TODO (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
+        // COMPLETED (3) Add the OnPreferenceChangeListener specifically to the EditTextPreference
     }
 
     @Override
@@ -88,10 +91,33 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         }
     }
 
-    // TODO (2) Override onPreferenceChange. This method should try to convert the new preference value
+    // COMPLETED (2) Override onPreferenceChange. This method should try to convert the new preference value
     // to a float; if it cannot, show a helpful error message and return false. If it can be converted
     // to a float check that that float is between 0 (exclusive) and 3 (inclusive). If it isn't, show
     // an error message and return false. If it is a valid number, return true.
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Toast error = Toast.makeText(getContext(), "input a number from 0 to 3", Toast.LENGTH_SHORT);
+        if (preference.getKey().equals(getString(R.string.pref_size_key))) {
+            String value = ((String) newValue).trim();
+            if (value == null) {
+                value = "1";
+            }
+            try {
+                Float floatValue = Float.parseFloat(value);
+                if (floatValue > 3 || floatValue < 0) {
+                    error.show();
+                    return false;
+                }
+                return true;
+            } catch (NumberFormatException e) {
+                error.show();
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,4 +132,5 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
+
 }
