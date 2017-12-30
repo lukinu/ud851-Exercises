@@ -171,7 +171,9 @@ public class TaskContentProvider extends ContentProvider {
                         mSelection,
                         mSelectionArgs);
                 // COMPLETED (3) Notify the resolver of a change and return the number of items deleted
-                getContext().getContentResolver().notifyChange(uri, null);
+                if (numberOfDeletedItems != 0) {
+                    getContext().getContentResolver().notifyChange(uri, null);
+                }
                 return numberOfDeletedItems;
             default:
                 throw new UnsupportedOperationException("Not yet implemented");
