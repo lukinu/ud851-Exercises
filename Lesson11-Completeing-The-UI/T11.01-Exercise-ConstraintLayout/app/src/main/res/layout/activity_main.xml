@@ -82,7 +82,7 @@
             app:layout_constraintStart_toStartOf="@+id/iv_depart"
             app:layout_constraintTop_toTopOf="@+id/iv_divider"
             tool:text="@string/origin_code"
-            tool:textSize="24sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_dest"
@@ -95,7 +95,7 @@
             app:layout_constraintStart_toStartOf="@+id/iv_dest"
             app:layout_constraintTop_toTopOf="@+id/iv_divider"
             tool:text="@string/destination_code"
-            tool:textSize="24sp" />
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/tv_boarding_in_label"
@@ -115,8 +115,8 @@
             app:layout_constraintStart_toStartOf="@+id/tv_boarding_in_label"
             app:layout_constraintTop_toBottomOf="@+id/tv_boarding_in_label"
             tool:text="@string/boarding_in_time"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="@color/colorBad" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorBad" />
 
 
         <TextView
@@ -136,8 +136,8 @@
             app:layout_constraintStart_toStartOf="@+id/tv_arrival_label"
             app:layout_constraintTop_toBottomOf="@+id/tv_arrival_label"
             tool:text="@string/arrival_time"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="@color/colorGood" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorGood" />
 
         <TextView
             android:id="@+id/tv_boarding_label"
@@ -154,10 +154,10 @@
             android:id="@+id/tv_boarding_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintStart_toStartOf="@+id/tv_boarding_label"
             app:layout_constraintTop_toBottomOf="@+id/tv_boarding_label"
-            tool:text="@string/boarding_time"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            tool:text="@string/boarding_time" />
 
         <TextView
             android:id="@+id/tv_departure_label"
@@ -172,11 +172,11 @@
             android:id="@+id/tv_departure_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorGood"
             app:layout_constraintStart_toStartOf="@+id/tv_departure_label"
             app:layout_constraintTop_toBottomOf="@+id/tv_departure_label"
-            tool:text="@string/departure_time"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="@color/colorGood" />
+            tool:text="@string/departure_time" />
 
         <ImageView
             android:id="@+id/iv_table_header"
@@ -259,12 +259,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="@+id/iv_table_body"
             app:layout_constraintStart_toStartOf="@+id/iv_table_body"
             app:layout_constraintTop_toTopOf="@+id/iv_table_body"
-            tool:text="@string/terminal"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="#fff" />
+            tool:text="@string/terminal" />
 
         <TextView
             android:id="@+id/tv_gate"
@@ -274,13 +274,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="@+id/iv_table_body"
             app:layout_constraintEnd_toEndOf="@+id/iv_table_body"
             app:layout_constraintStart_toStartOf="@+id/iv_table_body"
             app:layout_constraintTop_toTopOf="@+id/iv_table_body"
-            tool:text="@string/gate"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="#fff" />
+            tool:text="@string/gate" />
 
         <TextView
             android:id="@+id/tv_seat"
@@ -290,12 +290,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="#fff"
             app:layout_constraintBottom_toBottomOf="@+id/iv_table_body"
             app:layout_constraintEnd_toEndOf="@+id/iv_table_body"
             app:layout_constraintTop_toBottomOf="@+id/tv_gate_label"
-            tool:text="@string/seat"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            tool:textColor="#fff" />
+            tool:text="@string/seat" />
 
         <TextView
             android:id="@+id/tv_flight_code"
@@ -309,7 +309,7 @@
             app:layout_constraintStart_toStartOf="@+id/iv_divider"
             app:layout_constraintTop_toBottomOf="@+id/iv_divider"
             tool:text="@string/flight_code"
-            tool:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <ImageView
             android:id="@+id/iv_plane"
