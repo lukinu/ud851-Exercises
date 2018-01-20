@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         mBinding.textViewOriginAirport.setText(info.originCode);
         mBinding.textViewFlightCode.setText(info.flightCode);
         mBinding.textViewDestinationAirport.setText(info.destCode);
-        mBinding.barcode.setImageResource(info.barCodeImageResource);
 
         // COMPLETED (7) Use a SimpleDateFormat formatter to set the formatted value in time text views
         SimpleDateFormat format = new SimpleDateFormat("hh:mm a", Locale.getDefault());
