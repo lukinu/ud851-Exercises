@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_color_labels">
+        <item>@string/list_pref_entry_1</item>
+        <item>@string/list_pref_entry_2</item>
+        <item>@string/list_pref_entry_3</item>
+    </array>
+
+    <array name="pref_color_vlues">
+        <item>@string/pref_color_red_value</item>
+        <item>@string/pref_color_blue_value</item>
+        <item>@string/pref_color_green_value</item>
+    </array>
+
+</resources>

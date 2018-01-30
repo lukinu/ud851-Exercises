@@ -33,8 +33,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-// TODO (1) Implement OnSharedPreferenceChangeListener
-public class VisualizerActivity extends AppCompatActivity {
+// COMPLETED (1) Implement OnSharedPreferenceChangeListener
+public class VisualizerActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 88;
     private VisualizerView mVisualizerView;
@@ -58,11 +58,12 @@ public class VisualizerActivity extends AppCompatActivity {
         mVisualizerView.setShowTreble(true);
         mVisualizerView.setMinSizeScale(1);
         mVisualizerView.setColor(getString(R.string.pref_color_red_value));
-        // TODO (3) Register the listener
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+        // COMPLETED (3) Register the listener
     }
 
-    // TODO (2) Override the onSharedPreferenceChanged method and update the show bass preference
-    // TODO (4) Override onDestroy and unregister the listener
+    // COMPLETED (2) Override the onSharedPreferenceChanged method and update the show bass preference
+    // COMPLETED (4) Override onDestroy and unregister the listener
 
     /**
      * Methods for setting up the menu
@@ -111,7 +112,7 @@ public class VisualizerActivity extends AppCompatActivity {
             mAudioInputReader.restart();
         }
     }
-    
+
     /**
      * App Permissions for Audio
      **/
@@ -121,7 +122,7 @@ public class VisualizerActivity extends AppCompatActivity {
             // And if we're on SDK M or later...
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 // Ask again, nicely, for the permissions.
-                String[] permissionsWeNeed = new String[]{ Manifest.permission.RECORD_AUDIO };
+                String[] permissionsWeNeed = new String[]{Manifest.permission.RECORD_AUDIO};
                 requestPermissions(permissionsWeNeed, MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE);
             }
         } else {
@@ -151,5 +152,21 @@ public class VisualizerActivity extends AppCompatActivity {
             // Other permissions could go down here
 
         }
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(getResources().getString(R.string.pref_show_bass_key))) {
+            Boolean defaultSetting = getResources().getBoolean(R.bool.pref_show_bass_default);
+            Boolean setting = sharedPreferences.getBoolean(key, defaultSetting);
+            mVisualizerView.setShowBass(setting);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 }
